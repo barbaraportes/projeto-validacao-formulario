@@ -48,6 +48,7 @@ const mensagens = {
 }
 
 function verificaCampo(campo) {
+    let mensagem = "";
     if (campo.name == "cpf" && campo.value.length >= 11) {
         ehUmCPF(campo);
     }
@@ -55,7 +56,12 @@ function verificaCampo(campo) {
     if (campo.name == "aniversario" && campo.value != "") {
         ehMaiorDeIdade(campo);
     }
-    console.log(campo.validity);
+    tiposDeErro.forEach(erro => {
+        if (campo.validity[erro]) {
+            mensagem = mensagens[campo.name][erro];
+            console.log(mensagem);
+        }
+    })
 }
 
 
